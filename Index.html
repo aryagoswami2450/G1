@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <meta name="theme-color" content="#07090e"/>
+  <title>GA-H61M-DS2 Mobile Assembly</title>
+  <style>
+    :root {
+      --bg: #07090e;
+      --card-bg: #111722;
+      --accent: #00ffaa;
+      --danger: #ef4444;
+      --gold: #f59e0b;
+      --mobo-blue: #09477d;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      touch-action: manipulation;
+    }
+
+    body {
+      background: var(--bg);
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 8px;
+    }
+
+    /* MOBILE STICKY APP HEADER */
+    header {
+      width: 100%;
+      max-width: 500px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 14px;
+      background: var(--card-bg);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      border: 1px solid #1f2937;
+    }
+
+    .header-info h2 {
+      font-size: 0.95rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .header-info small {
+      font-size: 0.72rem;
+      color: #94a3b8;
+    }
+
+    .btn-power {
+      background: #dc2626;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      border-radius: 6px;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(220, 38, 38, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-power:active {
+      transform: scale(0.96);
+    }
+
+    /* CURRENT SELECTION & COUNTER BANNER */
+    .status-bar {
+      width: 100%;
+      max-width: 500px;
+      background: #0d1520;
+      border: 1px solid #243042;
+      border-radius: 6px;
+      padding: 6px 12px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+    }
+
+    /* MOTHERBOARD CONTAINER (FLUID SCALING) */
+    .mobo-wrapper {
+      width: 100%;
+      max-width: 500px;
+      background: #090e14;
+      border-radius: 10px;
+      padding: 6px;
+      border: 1px solid #1e293b;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .motherboard {
+      width: 100%;
+      aspect-ratio: 630 / 700;
+      background: var(--mobo-blue);
+      border: 2px solid #1e3a5f;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.8);
+    }
+
+    .pcb-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* HITBOXES WITH EXPANDED TOUCH PADDING */
+    .slot {
+      position: absolute;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .slot::after {
+      content: '';
+      position: absolute;
+      inset: -6px; /* Expand touch radius for fingers */
+    }
+
+    .slot:active {
+      outline: 2px solid var(--accent);
+    }
+
+    #slot-cpu {
+      left: 48%;
+      top: 36%;
+      width: 29%;
+      height: 26%;
+      background: rgba(15, 23, 42, 0.45);
+      border: 2px solid #cbd5e1;
+      border-radius: 4px;
+      z-index: 15;
+    }
+
+    #slot-ram1 {
+      left: 33.5%;
+      top: 77.8%;
+      width: 63%;
+      height: 3.8%;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid #38bdf8;
+    }
+
+    #slot-ram2 {
+      left: 33.5%;
+      top: 82.8%;
+      width: 63%;
+      height: 3.8%;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid #38bdf8;
+    }
+
+    #slot-power {
+      left: 33%;
+      top: 91.5%;
+      width: 25.5%;
+      height: 5.5%;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid #ffffff;
+    }
+
+    #slot-atx12v {
+      left: 80.5%;
+      top: 5.2%;
+      width: 6.5%;
+      height: 5.2%;
+      background: rgba(255, 255, 255, 0.2);
+      border: 2px solid #ffffff;
+    }
+
+    #slot-sata {
+      left: 3.8%;
+      top: 86.5%;
+      width: 23.5%;
+      height: 11.5%;
+      background: rgba(56, 189, 248, 0.15);
+      border: 2px solid #38bdf8;
+    }
+
+    #slot-audio {
+      left: 26.5%;
+      top: 9.0%;
+      width: 6.5%;
+      height: 4.0%;
+      background: rgba(234, 179, 8, 0.2);
+      border: 2px solid #eab308;
+    }
+
+    #slot-usb {
+      left: 3.8%;
+      top: 45.0%;
+      width: 6.5%;
+      height: 9.5%;
+      background: rgba(56, 189, 248, 0.2);
+      border: 2px solid #38bdf8;
+    }
+
+    #slot-fpanel-board {
+      left: 3.0%;
+      top: 71.0%;
+      width: 7.0%;
+      height: 14.5%;
+      background: rgba(245, 158, 11, 0.3);
+      border: 2px dashed #f59e0b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 7px;
+      font-weight: 800;
+      color: #fcd34d;
+      writing-mode: vertical-rl;
+      cursor: pointer;
+      z-index: 20;
+    }
+
+    /* COMPACT MOBILE INVENTORY TRAY */
+    .inventory-panel {
+      width: 100%;
+      max-width: 500px;
+      background: var(--card-bg);
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid #1f2937;
+    }
+
+    .inventory-title {
+      font-size: 0.75rem;
+      font-weight: 800;
+      color: #94a3b8;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .parts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+      max-height: 240px;
+      overflow-y: auto;
+      padding-right: 2px;
+    }
+
+    .part-card {
+      background: #182230;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 8px 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.1s;
+    }
+
+    .part-card:active {
+      transform: scale(0.97);
+    }
+
+    .part-card.selected {
+      border-color: var(--accent);
+      background: #133329;
+      box-shadow: 0 0 8px rgba(0, 255, 170, 0.35);
+    }
+
+    .part-card.used {
+      display: none;
+    }
+
+    .part-icon {
+      font-size: 1.1rem;
+      min-width: 22px;
+      text-align: center;
+    }
+
+    .part-info h4 {
+      font-size: 0.75rem;
+      color: #f1f5f9;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .part-info small {
+      font-size: 0.65rem;
+      color: #94a3b8;
+      display: block;
+    }
+
+    /* INSTALLED GRAPHICS */
+    .installed-cpu {
+      width: 100%;
+      height: 100%;
+      background: #cbd5e1;
+      border: 3px solid #64748b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .installed-fan {
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, #475569 40%, #0f172a 75%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid #64748b;
+    }
+
+    .fan-blades {
+      font-size: 2rem;
+      color: #94a3b8;
+    }
+
+    .fan-spinning {
+      animation: spin 0.2s linear infinite;
+    }
+
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    .installed-ram {
+      width: 100%;
+      height: 100%;
+      background: #0284c7;
+      border: 1px solid #38bdf8;
+    }
+
+    .installed-cable {
+      width: 100%;
+      height: 100%;
+      background: #dc2626;
+    }
+    .installed-power { background: #f59e0b; }
+    .installed-atx12v { background: #eab308; }
+    .installed-usb { background: #0284c7; }
+    .installed-audio { background: #10b981; }
+
+    /* MOBILE EXTENDED F_PANEL BOTTOM-SHEET / MODAL */
+    .fpanel-extended-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 500;
+    }
+
+    .fpanel-box {
+      width: 100%;
+      max-width: 500px;
+      background: #0c121d;
+      border-top: 3px solid var(--gold);
+      border-radius: 16px 16px 0 0;
+      padding: 16px;
+      box-shadow: 0 -5px 25px rgba(0,0,0,0.8);
+      animation: slideUp 0.2s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+
+    .fpanel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #1e293b;
+      padding-bottom: 8px;
+    }
+
+    .fpanel-header h3 {
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .fpanel-grid {
+      background: #05080e;
+      border: 2px solid #334155;
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .fpin-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .fpin-block {
+      background: #16202e;
+      border: 1px dashed #475569;
+      border-radius: 6px;
+      height: 54px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .fpin-block:active:not(.disabled) {
+      background: #1e2d42;
+      border-color: var(--accent);
+    }
+
+    .fpin-block.disabled {
+      opacity: 0.25;
+      cursor: not-allowed;
+      border-style: solid;
+    }
+
+    .fpin-gold {
+      width: 9px;
+      height: 9px;
+      background: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 5px var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .fpin-text {
+      font-size: 9px;
+      font-weight: 800;
+      color: #cbd5e1;
+    }
+
+    .fpin-num {
+      position: absolute;
+      top: 3px;
+      left: 4px;
+      font-size: 7px;
+      color: #64748b;
+    }
+
+    .plugged-pin-wire {
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 9px;
+    }
+    .plug-pwr { background: #ef4444; }
+    .plug-rst { background: #3b82f6; }
+    .plug-pled { background: #10b981; }
+    .plug-hdd { background: #f59e0b; }
+
+    .btn-close-fpanel {
+      width: 100%;
+      background: #1e293b;
+      color: #cbd5e1;
+      border: 1px solid #475569;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    /* OVERLAYS (GAME OVER & WIN) */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 20px;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 380px;
+      background: #111827;
+      border: 2px solid #374151;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .modal.gameover {
+      border-color: var(--danger);
+      box-shadow: 0 0 35px rgba(239, 68, 68, 0.45);
+    }
+
+    .modal.win {
+      border-color: var(--accent);
+      box-shadow: 0 0 35px rgba(0, 255, 170, 0.45);
+    }
+
+    .modal h2 { font-size: 1.4rem; margin-bottom: 10px; }
+    .modal p { color: #94a3b8; margin-bottom: 20px; line-height: 1.4; font-size: 0.85rem; }
+
+    .btn-action {
+      width: 100%;
+      border: none;
+      padding: 12px;
+      font-size: 0.95rem;
+      font-weight: 800;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .btn-retry { background: var(--danger); color: white; }
+    .btn-win { background: var(--accent); color: black; }
+  </style>
+</head>
+<body>
+
+  <!-- STICKY TOP APP BAR -->
+  <header>
+    <div class="header-info">
+      <h2>GA-H61M-DS2</h2>
+      <small>Touch Motherboard Assembly</small>
+    </div>
+    <button class="btn-power" id="btn-power">⚡ POWER ON</button>
+  </header>
+
+  <!-- CURRENT STATUS -->
+  <div class="status-bar">
+    <span id="selected-status">Hold: <strong>None</strong></span>
+    <span id="installed-counter" style="color: var(--accent);">0/13 Placed</span>
+  </div>
+
+  <!-- MOTHERBOARD RESPONSIVE CONTAINER -->
+  <div class="mobo-wrapper">
+    <div class="motherboard" id="mobo">
+      
+      <!-- SILKSCREEN VECTOR BLUEPRINT -->
+      <svg class="pcb-svg" viewBox="0 0 630 700">
+        <g stroke="#165b99" stroke-width="1.5" fill="none" opacity="0.8">
+          <path d="M 60 150 L 160 150 L 300 250" />
+          <path d="M 180 300 L 180 440 L 260 440" />
+          <path d="M 310 540 L 310 630" />
+          <path d="M 420 440 L 420 540" />
+          <path d="M 220 600 L 220 650" />
+        </g>
+
+        <!-- Back I/O Panel -->
+        <g fill="#1e293b" stroke="#64748b" stroke-width="1.5">
+          <rect x="20" y="20" width="40" height="40" rx="2" />
+          <rect x="220" y="20" width="35" height="35" rx="2" />
+          <rect x="270" y="20" width="45" height="35" rx="2" />
+          <rect x="345" y="20" width="40" height="35" rx="2" />
+          <rect x="430" y="20" width="55" height="35" rx="2" />
+          <rect x="555" y="20" width="45" height="40" rx="2" />
+        </g>
+        <text x="24" y="15" fill="#ffffff" font-size="9" font-weight="bold">AUDIO</text>
+        <text x="268" y="15" fill="#ffffff" font-size="9" font-weight="bold">USB_LAN</text>
+        <text x="445" y="15" fill="#ffffff" font-size="9" font-weight="bold">VGA</text>
+        <text x="560" y="15" fill="#ffffff" font-size="9" font-weight="bold">KB_MS</text>
+
+        <!-- ATX_12V CPU Power -->
+        <rect x="510" y="38" width="38" height="34" rx="2" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+        <text x="502" y="86" fill="#ffffff" font-size="11" font-weight="bold">ATX_12V</text>
+
+        <!-- CPU_FAN Header -->
+        <rect x="400" y="28" width="24" height="15" rx="1" fill="#f8fafc" stroke="#94a3b8"/>
+        <text x="390" y="55" fill="#ffffff" font-size="9" font-weight="bold">CPU_FAN</text>
+
+        <!-- F_AUDIO Header -->
+        <rect x="170" y="64" width="38" height="25" rx="2" fill="#020617" stroke="#eab308" stroke-width="1.5"/>
+        <text x="165" y="103" fill="#ffffff" font-size="10" font-weight="bold">F_AUDIO</text>
+
+        <!-- PCIe Slots -->
+        <rect x="160" y="110" width="22" height="210" rx="2" fill="#0284c7" stroke="#38bdf8"/>
+        <text x="165" y="103" fill="#ffffff" font-size="9" font-weight="bold" transform="rotate(90,165,103)">PCIEX16</text>
+        
+        <rect x="90" y="110" width="20" height="90" rx="2" fill="#f8fafc" stroke="#94a3b8"/>
+        <rect x="115" y="110" width="20" height="90" rx="2" fill="#f8fafc" stroke="#94a3b8"/>
+
+        <!-- CR2032 Battery -->
+        <circle cx="225" cy="355" r="28" fill="#1e293b" stroke="#cbd5e1" stroke-width="2"/>
+        <text x="212" y="359" fill="#94a3b8" font-size="9" font-weight="bold">BAT</text>
+
+        <!-- F_USB Headers -->
+        <rect x="25" y="318" width="38" height="63" rx="2" fill="#020617" stroke="#38bdf8" stroke-width="2"/>
+        <text x="22" y="310" fill="#ffffff" font-size="10" font-weight="bold">F_USB1</text>
+        <text x="22" y="395" fill="#ffffff" font-size="10" font-weight="bold">F_USB2</text>
+
+        <!-- Socket 1155 Base Plate -->
+        <rect x="302" y="252" width="183" height="182" rx="4" fill="#082b4c" stroke="#cbd5e1" stroke-width="2.5"/>
+        <text x="345" y="420" fill="#ffffff" font-size="14" font-weight="bold" letter-spacing="1">Socket 1155</text>
+        
+        <!-- PCH Heatsink -->
+        <rect x="42" y="420" width="105" height="105" rx="4" fill="#64748b" stroke="#94a3b8" stroke-width="2"/>
+        <line x1="60" y1="420" x2="60" y2="525" stroke="#334155" stroke-width="2"/>
+        <line x1="80" y1="420" x2="80" y2="525" stroke="#334155" stroke-width="2"/>
+        <line x1="100" y1="420" x2="100" y2="525" stroke="#334155" stroke-width="2"/>
+        <line x1="120" y1="420" x2="120" y2="525" stroke="#334155" stroke-width="2"/>
+        <text x="80" y="475" fill="#ffffff" font-size="11" font-weight="bold">PCH</text>
+
+        <!-- F_PANEL Silk Label -->
+        <text x="18" y="525" fill="#fcd34d" font-size="10" font-weight="bold">F_PANEL</text>
+
+        <!-- SATA2 Ports -->
+        <rect x="25" y="609" width="145" height="77" rx="3" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+        <text x="35" y="602" fill="#ffffff" font-size="11" font-weight="bold">SATA2_0-3</text>
+
+        <!-- Dual Horizontal DDR3 Slots -->
+        <rect x="211" y="545" width="397" height="25" rx="2" fill="#0369a1" stroke="#38bdf8" stroke-width="1"/>
+        <rect x="211" y="580" width="397" height="25" rx="2" fill="#0369a1" stroke="#38bdf8" stroke-width="1"/>
+        <text x="215" y="538" fill="#ffffff" font-size="11" font-weight="bold">DDR3_1</text>
+        <text x="215" y="618" fill="#ffffff" font-size="11" font-weight="bold">DDR3_2</text>
+
+        <!-- 24-Pin ATX Main Power -->
+        <rect x="208" y="644" width="160" height="37" rx="2" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+        <text x="215" y="638" fill="#ffffff" font-size="12" font-weight="bold">ATX (24-PIN)</text>
+
+        <!-- Motherboard Name -->
+        <text x="260" y="470" fill="#ffffff" font-size="14" font-weight="bold">GIGABYTE GA-H61M-DS2</text>
+      </svg>
+
+      <!-- HITBOXES -->
+      <div class="slot" id="slot-cpu" data-id="cpu"></div>
+      <div class="slot" id="slot-ram1" data-id="ram1"></div>
+      <div class="slot" id="slot-ram2" data-id="ram2"></div>
+      <div class="slot" id="slot-power" data-id="power"></div>
+      <div class="slot" id="slot-atx12v" data-id="atx12v"></div>
+      <div class="slot" id="slot-sata" data-id="sata"></div>
+      <div class="slot" id="slot-audio" data-id="audio"></div>
+      <div class="slot" id="slot-usb" data-id="usb"></div>
+
+      <!-- F_PANEL Motherboard Header -->
+      <div id="slot-fpanel-board">
+        <span>F_PANEL</span>
+        <span style="font-size:6px; color:#cbd5e1; margin-top:2px;">[TAP]</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPACT MOBILE INVENTORY -->
+  <div class="inventory-panel">
+    <div class="inventory-title">
+      <span>Components Tray</span>
+      <span style="color:var(--accent);">Tap item to select</span>
+    </div>
+    <div class="parts-grid" id="parts-tray">
+      <div class="part-card" data-part="cpu">
+        <span class="part-icon">🔲</span>
+        <div class="part-info"><h4>Core i5 CPU</h4><small>Socket 1155</small></div>
+      </div>
+      <div class="part-card" data-part="fan">
+        <span class="part-icon">❄️</span>
+        <div class="part-info"><h4>CPU Cooler</h4><small>Stock push-pin</small></div>
+      </div>
+      <div class="part-card" data-part="ram1">
+        <span class="part-icon">🚥</span>
+        <div class="part-info"><h4>4GB DDR3 (1)</h4><small>DDR3_1</small></div>
+      </div>
+      <div class="part-card" data-part="ram2">
+        <span class="part-icon">🚥</span>
+        <div class="part-info"><h4>4GB DDR3 (2)</h4><small>DDR3_2</small></div>
+      </div>
+      <div class="part-card" data-part="power">
+        <span class="part-icon">🔌</span>
+        <div class="part-info"><h4>24-Pin ATX</h4><small>Main power</small></div>
+      </div>
+      <div class="part-card" data-part="atx12v">
+        <span class="part-icon">⚡</span>
+        <div class="part-info"><h4>4-Pin ATX_12V</h4><small>CPU 12V feed</small></div>
+      </div>
+      <div class="part-card" data-part="sata">
+        <span class="part-icon">💾</span>
+        <div class="part-info"><h4>SATA Cable</h4><small>Storage lead</small></div>
+      </div>
+      <div class="part-card" data-part="audio">
+        <span class="part-icon">🎧</span>
+        <div class="part-info"><h4>HD Audio</h4><small>F_AUDIO</small></div>
+      </div>
+      <div class="part-card" data-part="usb">
+        <span class="part-icon">🧷</span>
+        <div class="part-info"><h4>USB 2.0 Cable</h4><small>F_USB</small></div>
+      </div>
+      <div class="part-card" data-part="pwr_sw">
+        <span class="part-icon">🔘</span>
+        <div class="part-info"><h4>POWER SW</h4><small>F_PANEL 2-Pin</small></div>
+      </div>
+      <div class="part-card" data-part="rst_sw">
+        <span class="part-icon">🔄</span>
+        <div class="part-info"><h4>RESET SW</h4><small>F_PANEL 2-Pin</small></div>
+      </div>
+      <div class="part-card" data-part="pled">
+        <span class="part-icon">💡</span>
+        <div class="part-info"><h4>POWER LED</h4><small>F_PANEL 2-Pin</small></div>
+      </div>
+      <div class="part-card" data-part="hdd_led">
+        <span class="part-icon">🔴</span>
+        <div class="part-info"><h4>HDD LED</h4><small>F_PANEL 2-Pin</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE EXTENDED F_PANEL BOTTOM-SHEET -->
+  <div class="fpanel-extended-modal" id="fpanel-modal">
+    <div class="fpanel-box">
+      <div class="fpanel-header">
+        <h3>⚡ EXTENDED F_PANEL HEADER</h3>
+        <span style="font-size: 10px; color:#f59e0b;">JFP1 (Pins 1-10)</span>
+      </div>
+
+      <div class="fpanel-grid">
+        <!-- TOP ROW: Pins 2,4 (PLED) | Pins 6,8 (PWR_SW) | Pin 10 (NC) -->
+        <div class="fpin-row">
+          <div class="fpin-block slot" data-id="pled">
+            <span class="fpin-num">2,4</span>
+            <div class="fpin-gold"></div>
+            <div class="fpin-text">PLED (+/-)</div>
+          </div>
+          <div class="fpin-block slot" data-id="pwr_sw">
+            <span class="fpin-num">6,8</span>
+            <div class="fpin-gold"></div>
+            <div class="fpin-text">PWR_SW</div>
+          </div>
+          <div class="fpin-block disabled">
+            <span class="fpin-num">10</span>
+            <div style="font-size: 9px; color:#475569;">NC</div>
+          </div>
+        </div>
+
+        <!-- BOTTOM ROW: Pins 1,3 (HDD_LED) | Pins 5,7 (RST_SW) | Pin 9 (KEY) -->
+        <div class="fpin-row">
+          <div class="fpin-block slot" data-id="hdd_led">
+            <span class="fpin-num">1,3</span>
+            <div class="fpin-gold"></div>
+            <div class="fpin-text">HD_LED</div>
+          </div>
+          <div class="fpin-block slot" data-id="rst_sw">
+            <span class="fpin-num">5,7</span>
+            <div class="fpin-gold"></div>
+            <div class="fpin-text">RST_SW</div>
+          </div>
+          <div class="fpin-block disabled">
+            <span class="fpin-num">9</span>
+            <div style="font-size: 9px; color:#475569;">KEY</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-close-fpanel" id="btn-close-fpanel">✕ Return to Motherboard</button>
+    </div>
+  </div>
+
+  <!-- GAME OVER MODAL -->
+  <div class="overlay" id="modal-fail">
+    <div class="modal gameover">
+      <h2 style="color: var(--danger);">💥 SHORT CIRCUIT!</h2>
+      <p id="fail-reason"></p>
+      <button class="btn-action btn-retry" onclick="resetGame()">TRY AGAIN</button>
+    </div>
+  </div>
+
+  <!-- WIN MODAL -->
+  <div class="overlay" id="modal-win">
+    <div class="modal win">
+      <h2 style="color: var(--accent);">✅ SYSTEM BOOTED!</h2>
+      <p>All hardware initialized properly. 8GB DDR3 active, CPU running cool, Front Panel correctly mapped.</p>
+      <button class="btn-action btn-win" onclick="resetGame()">BUILD AGAIN</button>
+    </div>
+  </div>
+
+  <script>
+    /* HAPTICS & SOUND (MOBILE SAFE) */
+    let audioCtx = null;
+
+    function triggerHaptic(type) {
+      if (!navigator.vibrate) return;
+      if (type === 'tap') navigator.vibrate(15);
+      else if (type === 'snap') navigator.vibrate(30);
+      else if (type === 'fail') navigator.vibrate([100, 50, 100]);
+    }
+
+    function playSound(type) {
+      triggerHaptic(type);
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const now = audioCtx.currentTime;
+
+        if (type === 'tap' || type === 'click') {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.frequency.setValueAtTime(700, now);
+          gain.gain.setValueAtTime(0.06, now);
+          gain.gain.linearRampToValueAtTime(0, now + 0.03);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(now); osc.stop(now + 0.03);
+        } 
+        else if (type === 'snap') {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(320, now);
+          osc.frequency.exponentialRampToValueAtTime(50, now + 0.07);
+          gain.gain.setValueAtTime(0.4, now);
+          gain.gain.linearRampToValueAtTime(0, now + 0.07);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(now); osc.stop(now + 0.07);
+        }
+        else if (type === 'fail') {
+          const bufferSize = audioCtx.sampleRate * 0.45;
+          const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let i = 0; i < bufferSize; i++) data[i] = Math.random() * 2 - 1;
+          const noise = audioCtx.createBufferSource();
+          noise.buffer = buffer;
+          const gain = audioCtx.createGain();
+          gain.gain.setValueAtTime(0.6, now);
+          gain.gain.linearRampToValueAtTime(0, now + 0.45);
+          noise.connect(gain); gain.connect(audioCtx.destination);
+          noise.start(now);
+        }
+        else if (type === 'boot') {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.frequency.setValueAtTime(880, now);
+          gain.gain.setValueAtTime(0.25, now);
+          gain.gain.linearRampToValueAtTime(0, now + 0.25);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(now); osc.stop(now + 0.25);
+        }
+      } catch (err) {}
+    }
+
+    /* GAME STATE */
+    let selectedPart = null;
+    let installed = {};
+
+    function initGame() {
+      installed = {
+        cpu: false,
+        fan: false,
+        ram1: false,
+        ram2: false,
+        power: false,
+        atx12v: false,
+        sata: false,
+        audio: false,
+        usb: false,
+        pwr_sw: false,
+        rst_sw: false,
+        pled: false,
+        hdd_led: false
+      };
+      selectedPart = null;
+
+      document.querySelectorAll('.part-card').forEach(c => c.classList.remove('selected', 'used'));
+      document.querySelectorAll('.slot:not(.fpin-block)').forEach(s => s.innerHTML = '');
+
+      const cpuSlot = document.getElementById('slot-cpu');
+      cpuSlot.dataset.id = 'cpu';
+
+      // Reset F_PANEL
+      document.querySelectorAll('.fpin-block').forEach(b => {
+        const id = b.dataset.id;
+        if (id === 'pled') b.innerHTML = '<span class="fpin-num">2,4</span><div class="fpin-gold"></div><div class="fpin-text">PLED (+/-)</div>';
+        if (id === 'pwr_sw') b.innerHTML = '<span class="fpin-num">6,8</span><div class="fpin-gold"></div><div class="fpin-text">PWR_SW</div>';
+        if (id === 'hdd_led') b.innerHTML = '<span class="fpin-num">1,3</span><div class="fpin-gold"></div><div class="fpin-text">HD_LED</div>';
+        if (id === 'rst_sw') b.innerHTML = '<span class="fpin-num">5,7</span><div class="fpin-gold"></div><div class="fpin-text">RST_SW</div>';
+      });
+
+      document.getElementById('modal-fail').style.display = 'none';
+      document.getElementById('modal-win').style.display = 'none';
+      document.getElementById('fpanel-modal').style.display = 'none';
+
+      updateStatusBar();
+    }
+
+    function updateStatusBar() {
+      const statusText = document.getElementById('selected-status');
+      const counterText = document.getElementById('installed-counter');
+      const count = Object.values(installed).filter(Boolean).length;
+
+      if (selectedPart) {
+        statusText.innerHTML = `Hold: <strong style="color:var(--accent);">${formatName(selectedPart)}</strong>`;
+      } else {
+        statusText.innerHTML = `Hold: <strong>None (Tap below)</strong>`;
+      }
+      counterText.innerText = `${count}/13 Placed`;
+    }
+
+    /* F_PANEL MODAL */
+    function openFpanelModal() {
+      playSound('tap');
+      document.getElementById('fpanel-modal').style.display = 'flex';
+    }
+
+    function closeFpanelModal() {
+      playSound('tap');
+      document.getElementById('fpanel-modal').style.display = 'none';
+    }
+
+    document.getElementById('slot-fpanel-board').addEventListener('click', openFpanelModal);
+    document.getElementById('btn-close-fpanel').addEventListener('click', closeFpanelModal);
+
+    /* INVENTORY CARD CLICK */
+    document.querySelectorAll('.part-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const part = card.dataset.part;
+        if (installed[part]) return;
+        playSound('tap');
+
+        document.querySelectorAll('.part-card').forEach(c => c.classList.remove('selected'));
+        if (selectedPart === part) {
+          selectedPart = null;
+        } else {
+          selectedPart = part;
+          card.classList.add('selected');
+
+          // Auto-slide up F_PANEL drawer on mobile
+          if (['pwr_sw', 'rst_sw', 'pled', 'hdd_led'].includes(part)) {
+            openFpanelModal();
+          }
+        }
+        updateStatusBar();
+      });
+    });
+
+    /* SLOT CLICK & HARDCORE VALIDATION */
+    document.querySelectorAll('.slot').forEach(slot => {
+      slot.addEventListener('click', (e) => {
+        if (!selectedPart) return;
+        e.stopPropagation();
+
+        const target = slot.dataset.id;
+        if (!target) return;
+
+        // 1. SEQUENCE RULE: Cooler installed before CPU
+        if (selectedPart === 'fan' && !installed.cpu) {
+          triggerGameOver("CRUSHED SOCKET! You tried to clamp the cooler onto bare LGA pins without installing the processor first.");
+          return;
+        }
+
+        // If CPU is installed and user mounts cooler: valid
+        if (selectedPart === 'fan' && installed.cpu && target === 'fan') {
+          installed.fan = true;
+          slot.innerHTML = `<div class="installed-fan"><div class="fan-blades" id="fan-blades">⚙️</div></div>`;
+          playSound('snap');
+          finalizePartInstall();
+          return;
+        }
+
+        // 2. F_PANEL Checks
+        const isFpanelPart = ['pwr_sw', 'rst_sw', 'pled', 'hdd_led'].includes(selectedPart);
+        const isFpanelSlot = ['pwr_sw', 'rst_sw', 'pled', 'hdd_led'].includes(target);
+
+        if (isFpanelPart && !isFpanelSlot) {
+          triggerGameOver("MISMATCH! You tried to insert a 2-Pin jumper lead into a main motherboard socket.");
+          return;
+        }
+        if (!isFpanelPart && isFpanelSlot) {
+          triggerGameOver("DAMAGE! You jammed a high-voltage cable into delicate F_PANEL header pins.");
+          return;
+        }
+        if (isFpanelPart && isFpanelSlot && selectedPart !== target) {
+          triggerGameOver(`F_PANEL SHORT CIRCUIT! You connected ${formatName(selectedPart)} to ${formatName(target)} pins. Power rails crossed!`);
+          return;
+        }
+
+        // 3. RAM Slots (Dual DDR3)
+        const isRamMatch = (selectedPart === 'ram1' || selectedPart === 'ram2') && 
+                           (target === 'ram1' || target === 'ram2');
+
+        // 4. General check
+        if (!isFpanelPart && selectedPart !== target && !isRamMatch) {
+          triggerGameOver(`WRONG PORT! You jammed ${formatName(selectedPart)} into ${formatName(target)} port.`);
+          return;
+        }
+
+        if (installed[target]) {
+          triggerGameOver("OCCUPIED! Slot already has a component installed.");
+          return;
+        }
+
+        // Correct Attachment
+        installed[selectedPart] = true;
+        renderComponent(selectedPart, slot);
+        playSound('snap');
+        finalizePartInstall();
+      });
+    });
+
+    function finalizePartInstall() {
+      const card = document.querySelector(`.part-card[data-part="${selectedPart}"]`);
+      if (card) {
+        card.classList.add('used');
+        card.classList.remove('selected');
+      }
+      selectedPart = null;
+      updateStatusBar();
+    }
+
+    function renderComponent(part, slotElement) {
+      if (part === 'cpu') {
+        slotElement.innerHTML = `<div class="installed-cpu"><div>Core i5</div><small style="font-size:7px; color:#475569;">LGA LOCKED</small></div>`;
+        slotElement.dataset.id = 'fan';
+      }
+      else if (part === 'fan') {
+        slotElement.innerHTML = `<div class="installed-fan"><div class="fan-blades" id="fan-blades">⚙️</div></div>`;
+      }
+      else if (part === 'ram1' || part === 'ram2') slotElement.innerHTML = `<div class="installed-ram"></div>`;
+      else if (part === 'power') slotElement.innerHTML = `<div class="installed-cable installed-power"></div>`;
+      else if (part === 'atx12v') slotElement.innerHTML = `<div class="installed-cable installed-atx12v"></div>`;
+      else if (part === 'sata') slotElement.innerHTML = `<div class="installed-cable"></div>`;
+      else if (part === 'audio') slotElement.innerHTML = `<div class="installed-cable installed-audio"></div>`;
+      else if (part === 'usb') slotElement.innerHTML = `<div class="installed-cable installed-usb"></div>`;
+      // Front Panel Dock Plugs
+      else if (part === 'pwr_sw') slotElement.innerHTML = `<div class="plugged-pin-wire plug-pwr">PWR</div>`;
+      else if (part === 'rst_sw') slotElement.innerHTML = `<div class="plugged-pin-wire plug-rst">RST</div>`;
+      else if (part === 'pled') slotElement.innerHTML = `<div class="plugged-pin-wire plug-pled">PLED</div>`;
+      else if (part === 'hdd_led') slotElement.innerHTML = `<div class="plugged-pin-wire plug-hdd">HDD</div>`;
+    }
+
+    /* POWER BUTTON VALIDATION */
+    document.getElementById('btn-power').addEventListener('click', () => {
+      const missing = Object.keys(installed).filter(k => !installed[k]);
+
+      if (missing.length > 0) {
+        if (!installed.power) {
+          triggerGameOver("MAIN POWER DISCONNECTED! The 24-Pin ATX cable was missing.");
+        } else if (!installed.atx12v) {
+          triggerGameOver("CPU POWER FAULT! The 4-Pin ATX_12V connector was unpowered.");
+        } else if (!installed.pwr_sw) {
+          triggerGameOver("OPEN SWITCH! The front panel PWR_SW leads are not connected.");
+        } else if (!installed.fan && installed.cpu) {
+          triggerGameOver("CPU BURNED! Silicon fried in 0.1s because the CPU Cooler was missing.");
+        } else {
+          triggerGameOver(`POST FAILURE! Incomplete circuit. Missing: ${missing.map(formatName).join(', ')}.`);
+        }
+        return;
+      }
+
+      playSound('boot');
+      const blades = document.getElementById('fan-blades');
+      if (blades) blades.classList.add('fan-spinning');
+      document.getElementById('modal-win').style.display = 'flex';
+    });
+
+    function triggerGameOver(reason) {
+      playSound('fail');
+      document.getElementById('fpanel-modal').style.display = 'none';
+      document.getElementById('fail-reason').innerText = reason;
+      document.getElementById('modal-fail').style.display = 'flex';
+    }
+
+    function formatName(id) {
+      const map = {
+        cpu: 'Socket 1155 CPU',
+        fan: 'CPU Cooler',
+        ram1: 'DDR3_1',
+        ram2: 'DDR3_2',
+        power: '24-Pin ATX',
+        atx12v: '4-Pin ATX_12V',
+        sata: 'SATA2',
+        audio: 'F_AUDIO',
+        usb: 'F_USB',
+        pwr_sw: 'PWR_SW',
+        rst_sw: 'RST_SW',
+        pled: 'PLED (+/-)',
+        hdd_led: 'HD_LED'
+      };
+      return map[id] || id;
+    }
+
+    function resetGame() {
+      initGame();
+    }
+
+    initGame();
+  </script>
+</body>
+</html>
